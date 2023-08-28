@@ -32,5 +32,5 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 🔖 Layout
 
-Você pode visualizar o Resultado do projeto através [Bora Codar #33](https://boracodar33.vercel.app/). <br/>
-Você pode visualizar o layout do projeto através [DESSE LINK](https://www.figma.com/community/file/1273622271836473382).
+Você pode visualizar o Resultado do projeto através [Bora Codar #34](https://boracodar34.vercel.app/). <br/>
+Você pode visualizar o layout do projeto através [DESSE LINK](https://www.figma.com/community/file/1276169043084346929).
