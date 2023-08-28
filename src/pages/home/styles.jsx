@@ -198,13 +198,12 @@ export const Category = styled.div`
 
   width: 168px;
 
-  @media (max-width: 770px) {
-    flex: 1 0 0;
-    /* width:138px; */
-  }
-
   gap: 8px;
   flex-shrink: 0;
+
+  @media (max-width: 770px) {
+    flex: 1 0 0;
+  }
 
   label {
     font-size: 12px;
@@ -252,11 +251,6 @@ export const Button = styled.button`
 
   width: 40px;
   height: 40px;
-
-  /* @media (max-width: 770px) {
-    width: 30px;
-    height:30px;
-  } */
 
   transition: all 0.3s;
 
