@@ -3,6 +3,7 @@ import { Container, Swapper, Header, DivItems, Item, Button, Quantify, UnitSelec
 import { useState } from "react";
 
 import { LuPlus, LuMoreVertical } from "react-icons/lu";
+import { MdOutlineClose } from "react-icons/md";
 
 import options from "../../data/options.jsx";
 
@@ -139,7 +140,9 @@ function Home() {
 
         <Main>
           {items.length === 0 ? (
-            <span>Nenhum item adicionado.</span>
+            <div className="nothing">
+              <span>Nenhum item adicionado.</span>
+            </div>
           ) : (
             items.map((item, index) => (
               <DivItem key={index} done={checkedItems.includes(index)}>
@@ -228,6 +231,9 @@ function Home() {
                       }}
                     >
                       Excluir
+                    </button>
+                    <button className="btnabs" onClick={closeDeleteModal}>
+                      <MdOutlineClose size={16} color="#fff" />
                     </button>
                   </div>
                 </div>

@@ -266,15 +266,17 @@ export const Main = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  text-align:center;
-
-
   width: 720px;
 
   gap: 12px;
   margin-top: 40px;
 
   position: relative;
+
+  .nothing {
+    width: 100%;
+    text-align: center;
+  }
 
   .modal-cover {
     display: flex;
@@ -311,6 +313,7 @@ export const Main = styled.div`
   }
 
   .modal-content {
+    margin-right: 27px;
     p {
       margin-bottom: 8px;
     }
@@ -318,7 +321,25 @@ export const Main = styled.div`
 
   .modal-buttons {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    padding-left: 27px;
+
+    .btnabs {
+      position: absolute;
+      background: #414143;
+      top: 8px;
+      right: 8px;
+      padding: 3px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+
+      border-radius: 100%;
+
+      &:hover {
+        background: #2e2e31;
+      }
+    }
 
     button {
       border-radius: 6px;
