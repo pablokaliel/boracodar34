@@ -1,4 +1,5 @@
 import { Container, Swapper, Header, DivItems, Item, Button, Quantify, UnitSelect, Category, SelectItens, Main, DivItem, Info, DivCategoryItem } from "./styles";
+
 import { useState } from "react";
 
 import { LuPlus, LuMoreVertical } from "react-icons/lu";
@@ -7,18 +8,31 @@ import options from "../../data/options.jsx";
 
 function Home() {
   const [items, setItems] = useState([]);
+
   const [itemName, setItemName] = useState("");
   const [itemQuantity, setItemQuantity] = useState("");
   const [itemUnit, setItemUnit] = useState("unit");
   const [itemCategory, setItemCategory] = useState(null);
 
   const [checkedItems, setCheckedItems] = useState([]);
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
 
   const removeItem = (index) => {
     setSelectedItemIndex(index);
     setShowDeleteModal(true);
+  };
+
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+  };
+
+  const onlyNumbers = (e) => {
+    const allowedKeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"];
+    if (!/\d/.test(e.key) && !allowedKeys.includes(e.key)) {
+      e.preventDefault();
+    }
   };
 
   const addItem = () => {
@@ -67,6 +81,7 @@ function Home() {
                     id="quantity"
                     value={itemQuantity}
                     onChange={(e) => setItemQuantity(e.target.value)}
+                    onKeyDown={(e) => onlyNumbers(e)}
                   />
                   <UnitSelect
                     id="unit"
@@ -189,33 +204,32 @@ function Home() {
           )}
 
           {showDeleteModal && (
-            <div className="modal">
-              <div className="modal-content">
-                {selectedItemIndex !== null && (
-                  <p>
-                    {" "}
-                    Deseja excluir este item:{" "}
-                    <span>{items[selectedItemIndex]?.name}?</span>{" "}
-                  </p>
-                )}
-                <div className="modal-buttons">
-                  <button onClick={() => setShowDeleteModal(false)}>
-                    Cancelar
-                  </button>
-                  <button
-                    onClick={() => {
-                      if (selectedItemIndex !== null) {
-                        const updatedItems = items.filter(
-                          (_, index) => index !== selectedItemIndex
-                        );
-                        setItems(updatedItems);
-                        setSelectedItemIndex(null);
-                        setShowDeleteModal(false);
-                      }
-                    }}
-                  >
-                    Excluir
-                  </button>
+            <div>
+              <div className="modal-cover" onClick={closeDeleteModal}></div>
+              <div className="modal">
+                <div className="modal-content">
+                  {selectedItemIndex !== null && (
+                    <p>
+                      Deseja excluir:{" "}
+                      <span>{items[selectedItemIndex]?.name}?</span>{" "}
+                    </p>
+                  )}
+                  <div className="modal-buttons">
+                    <button
+                      onClick={() => {
+                        if (selectedItemIndex !== null) {
+                          const updatedItems = items.filter(
+                            (_, index) => index !== selectedItemIndex
+                          );
+                          setItems(updatedItems);
+                          setSelectedItemIndex(null);
+                          setShowDeleteModal(false);
+                        }
+                      }}
+                    >
+                      Excluir
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
