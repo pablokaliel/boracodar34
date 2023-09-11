@@ -3,6 +3,8 @@ import Select from "react-select";
 
 import cover from "../../assets/cover.png";
 
+import  { motion } from "framer-motion";
+
 export const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -363,7 +365,7 @@ export const Main = styled.div`
   }
 `;
 
-export const DivItem = styled.div`
+export const DivItem = styled(motion.div)`
   display: flex;
   justify-content: space-between;
   align-items: center;

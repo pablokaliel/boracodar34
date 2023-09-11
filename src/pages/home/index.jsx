@@ -11,7 +11,7 @@ function Home() {
   const [items, setItems] = useState([]);
 
   const [itemName, setItemName] = useState("");
-  const [itemQuantity, setItemQuantity] = useState("");
+  const [itemQuantity, setItemQuantity] = useState(1);
   const [itemUnit, setItemUnit] = useState("unit");
   const [itemCategory, setItemCategory] = useState(null);
 
@@ -39,24 +39,30 @@ function Home() {
   const addItem = () => {
     if (itemName && itemQuantity && itemCategory) {
       if (!isNaN(itemQuantity)) {
-        const newItem = {
-          name: itemName,
-          quantity:
-            parseFloat(itemQuantity) +
-            " " +
-            (itemUnit === "unit" ? "unidades" : itemUnit),
-          category: itemCategory,
-        };
-        setItems((prevItems) => [...prevItems, newItem]);
-
-        setItemName("");
-        setItemQuantity("");
-        setItemUnit("unit");
+        const quantity = parseFloat(itemQuantity);
+  
+        if (quantity !== 0) { 
+          const unitText = quantity === 1 ? "unidade" : "unidades";
+  
+          const newItem = {
+            name: itemName,
+            quantity: quantity + " " + unitText,
+            category: itemCategory,
+          };
+          setItems((prevItems) => [...prevItems, newItem]);
+  
+          setItemName("");
+          setItemQuantity(1);
+          setItemUnit("unit");
+        } else {
+          alert("A quantidade não pode ser igual a zero.");
+        }
       } else {
         alert("A quantidade deve conter apenas números.");
       }
     }
   };
+  
 
   return (
     <Container>
@@ -83,6 +89,7 @@ function Home() {
                     value={itemQuantity}
                     onChange={(e) => setItemQuantity(e.target.value)}
                     onKeyDown={(e) => onlyNumbers(e)}
+                    maxLength={3}
                   />
                   <UnitSelect
                     id="unit"
@@ -145,7 +152,11 @@ function Home() {
             </div>
           ) : (
             items.map((item, index) => (
-              <DivItem key={index} done={checkedItems.includes(index)}>
+              <DivItem key={index} done={checkedItems.includes(index)}
+              initial={{ scale: 0.3, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              >
                 <Info done={checkedItems.includes(index)}>
                   <input
                     type="checkbox"
